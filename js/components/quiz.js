@@ -242,8 +242,16 @@ export const QUIZ = {
       }
     }
 
-    if (window.renderMathInElement) {
-      window.renderMathInElement(area);
+    if (window.app && window.app.renderMath) {
+      window.app.renderMath(area);
+    } else if (window.renderMathInElement) {
+      window.renderMathInElement(area, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "$", right: "$", display: false }
+        ],
+        throwOnError: false
+      });
     }
   },
 
@@ -293,8 +301,11 @@ export const QUIZ = {
   },
 
   formatSolution(raw) {
-    // Quick parser for bold, line breaks, and math
+    if (window.app && window.app.formatSolutionMarkdown) {
+      return window.app.formatSolutionMarkdown(raw);
+    }
     return raw
+      .replace(/\\n/g, "\n")
       .replace(/\n/g, "<br>")
       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
       .replace(/\*(.*?)\*/g, "<em>$1</em>");

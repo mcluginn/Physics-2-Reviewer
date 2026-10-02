@@ -18,6 +18,7 @@ class App {
     this.activeTopicId = TOPICS[0].id;
     this.currentPracticeProblem = null;
     this.practiceRevealed = { hint: false, step: false, solution: false, answer: false };
+    window.renderMath = (el) => this.renderMath(el);
     
     this.init();
   }
@@ -339,23 +340,23 @@ class App {
             </div>
             <div class="sol-step">
               <span class="sol-tag">2. REQUIRED</span>
-              <p>${ex.required}</p>
+              <p>${this.formatMathInline(ex.required)}</p>
             </div>
             <div class="sol-step">
               <span class="sol-tag">3. FORMULA</span>
-              <p>$$${ex.formula}$$</p>
+              <div class="step-math-content">${this.formatMathBlock(ex.formula)}</div>
             </div>
             <div class="sol-step">
               <span class="sol-tag">4. SUBSTITUTION</span>
-              <p>$$${ex.substitution}$$</p>
+              <div class="step-math-content">${this.formatMathBlock(ex.substitution)}</div>
             </div>
             <div class="sol-step">
               <span class="sol-tag">5. COMPUTATION</span>
-              <p>${ex.computation.replace(/\n/g, "<br>")}</p>
+              <div class="step-math-content">${this.formatMathBlock(ex.computation)}</div>
             </div>
             <div class="sol-step highlight-answer">
               <span class="sol-tag">6. FINAL ANSWER</span>
-              <h4>$$${ex.answer}$$</h4>
+              <div class="step-math-content answer-math">${this.formatMathBlock(ex.answer)}</div>
               <p class="text-sm"><em>${ex.interpretation}</em></p>
             </div>
           </div>
@@ -407,10 +408,10 @@ class App {
                   <strong>First Step:</strong> ${prob.firstStep}
                 </div>
                 <div class="prob-reveal-box" id="reveal-sol-${prob.id}" style="display:none;">
-                  <div class="solution-markdown">${prob.fullSolution.replace(/\n/g, "<br>")}</div>
+                  <div class="solution-markdown">${this.formatSolutionMarkdown(prob.fullSolution)}</div>
                 </div>
                 <div class="prob-reveal-box highlight-box" id="reveal-ans-${prob.id}" style="display:none;">
-                  <strong>Final Answer:</strong> ${prob.finalAnswer}
+                  <strong>Final Answer:</strong> ${this.formatMathInline(prob.finalAnswer)}
                 </div>
               </div>
             `).join("")}
@@ -451,20 +452,27 @@ class App {
       if (!card) return;
       card.querySelector(`.btn-prob-hint`).onclick = () => {
         const box = card.querySelector(`#reveal-hint-${prob.id}`);
-        box.style.display = box.style.display === "none" ? "block" : "none";
+        const isHidden = box.style.display === "none";
+        box.style.display = isHidden ? "block" : "none";
+        if (isHidden) this.renderMath(box);
       };
       card.querySelector(`.btn-prob-step`).onclick = () => {
         const box = card.querySelector(`#reveal-step-${prob.id}`);
-        box.style.display = box.style.display === "none" ? "block" : "none";
+        const isHidden = box.style.display === "none";
+        box.style.display = isHidden ? "block" : "none";
+        if (isHidden) this.renderMath(box);
       };
       card.querySelector(`.btn-prob-sol`).onclick = () => {
         const box = card.querySelector(`#reveal-sol-${prob.id}`);
-        box.style.display = box.style.display === "none" ? "block" : "none";
-        this.renderMath();
+        const isHidden = box.style.display === "none";
+        box.style.display = isHidden ? "block" : "none";
+        if (isHidden) this.renderMath(box);
       };
       card.querySelector(`.btn-prob-ans`).onclick = () => {
         const box = card.querySelector(`#reveal-ans-${prob.id}`);
-        box.style.display = box.style.display === "none" ? "block" : "none";
+        const isHidden = box.style.display === "none";
+        box.style.display = isHidden ? "block" : "none";
+        if (isHidden) this.renderMath(box);
       };
     });
 
@@ -551,10 +559,10 @@ class App {
               <strong>🐾 First Step:</strong> ${prob.firstStep}
             </div>
             <div id="pme-box-sol" class="reveal-panel" style="display:none;">
-              <div class="solution-markdown">${prob.fullSolution.replace(/\n/g, "<br>")}</div>
+              <div class="solution-markdown">${this.formatSolutionMarkdown(prob.fullSolution)}</div>
             </div>
             <div id="pme-box-ans" class="reveal-panel highlight-box" style="display:none;">
-              <strong>✓ Final Answer:</strong> ${prob.finalAnswer}
+              <strong>✓ Final Answer:</strong> ${this.formatMathInline(prob.finalAnswer)}
             </div>
           </div>
         </div>
@@ -596,8 +604,9 @@ class App {
       const bx = mount.querySelector(boxId);
       if (b && bx) {
         b.onclick = () => {
-          bx.style.display = bx.style.display === "none" ? "block" : "none";
-          this.renderMath();
+          const isHidden = bx.style.display === "none";
+          bx.style.display = isHidden ? "block" : "none";
+          if (isHidden) this.renderMath(bx);
         };
       }
     };
@@ -730,15 +739,89 @@ class App {
     runConv();
   }
 
-  renderMath() {
+  formatMathBlock(raw) {
+    if (!raw) return "";
+    const lines = String(raw).split(/\r?\n|\\n/).map(l => l.trim()).filter(l => l.length > 0);
+    return lines.map(line => {
+      let content = line;
+      if (content.startsWith("$$") && content.endsWith("$$") && content.length >= 4) {
+        content = content.slice(2, -2).trim();
+      } else if (content.startsWith("$") && content.endsWith("$") && content.length >= 2) {
+        content = content.slice(1, -1).trim();
+      }
+      return `<div class="math-display-line">$$${content}$$</div>`;
+    }).join("");
+  }
+
+  formatMathInline(raw) {
+    if (!raw) return "";
+    return String(raw).replace(/\\n/g, "<br>");
+  }
+
+  formatSolutionMarkdown(raw) {
+    if (!raw) return "";
+    const text = String(raw).replace(/\\n/g, "\n");
+    const lines = text.split("\n");
+    let html = [];
+    let inList = false;
+
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i].trim();
+      if (!line) {
+        if (inList) { html.push("</ul>"); inList = false; }
+        continue;
+      }
+
+      if (line.startsWith("* ")) {
+        if (!inList) { html.push("<ul class='sol-bullet-list'>"); inList = true; }
+        html.push(`<li>${line.slice(2)}</li>`);
+        continue;
+      } else if (inList) {
+        html.push("</ul>");
+        inList = false;
+      }
+
+      if (/^\*\*(.*?)\*\*$/.test(line)) {
+        const heading = line.replace(/^\*\*(.*?)\*\*$/, "$1");
+        html.push(`<h5 class="sol-heading">${heading}</h5>`);
+        continue;
+      }
+
+      if (line.startsWith("$$") && line.endsWith("$$")) {
+        html.push(`<div class="sol-math-block">${line}</div>`);
+        continue;
+      }
+
+      if (line.includes("\\frac") || line.includes("\\times") || line.includes("\\sqrt") || line.includes("\\approx") || line.includes("\\cdot")) {
+        let content = line;
+        if (content.startsWith("$$") && content.endsWith("$$")) {
+          content = content.slice(2, -2).trim();
+        } else if (content.startsWith("$") && content.endsWith("$")) {
+          content = content.slice(1, -1).trim();
+        }
+        html.push(`<div class="sol-math-block">$$${content}$$</div>`);
+        continue;
+      }
+
+      line = line.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+      html.push(`<p>${line}</p>`);
+    }
+
+    if (inList) html.push("</ul>");
+    return html.join("");
+  }
+
+  renderMath(container = document.body) {
+    if (!container) return;
     if (window.renderMathInElement) {
       try {
-        window.renderMathInElement(document.body, {
+        window.renderMathInElement(container, {
           delimiters: [
             { left: "$$", right: "$$", display: true },
             { left: "$", right: "$", display: false }
           ],
-          throwOnError: false
+          throwOnError: false,
+          errorColor: "#f7b943"
         });
         return;
       } catch (e) {
@@ -747,10 +830,11 @@ class App {
     }
 
     // High-fidelity fallback renderer for offline/local viewing
-    this.fallbackMathRender();
+    this.fallbackMathRender(container);
   }
 
-  fallbackMathRender() {
+  fallbackMathRender(container = document.body) {
+    if (!container) return;
     const walk = (node) => {
       if (node.nodeType === Node.TEXT_NODE) {
         let text = node.nodeValue;
@@ -770,7 +854,7 @@ class App {
         node.childNodes.forEach(child => walk(child));
       }
     };
-    walk(document.body);
+    walk(container);
   }
 
   formatLatexFallback(latex) {

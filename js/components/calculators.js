@@ -21,6 +21,21 @@ import {
   convertUnit
 } from "../engine/physicsMath.js";
 
+function renderCalcMath(el) {
+  if (!el) return;
+  if (window.app && window.app.renderMath) {
+    window.app.renderMath(el);
+  } else if (window.renderMathInElement) {
+    window.renderMathInElement(el, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+}
+
 export const CALCULATORS = {
   render(container) {
     container.innerHTML = `
@@ -412,7 +427,7 @@ export const CALCULATORS = {
             </div>
           </div>
         `;
-        if (window.renderMathInElement) window.renderMathInElement(document.getElementById("output-coulomb"));
+        renderCalcMath(document.getElementById("output-coulomb"));
       } catch (err) {
         document.getElementById("output-coulomb").innerHTML = `<div class="output-error">${err.message}</div>`;
       }
@@ -438,7 +453,7 @@ export const CALCULATORS = {
             </div>
           </div>
         `;
-        if (window.renderMathInElement) window.renderMathInElement(document.getElementById("output-efield"));
+        renderCalcMath(document.getElementById("output-efield"));
       } catch (err) {
         document.getElementById("output-efield").innerHTML = `<div class="output-error">${err.message}</div>`;
       }
@@ -464,7 +479,7 @@ export const CALCULATORS = {
             </div>
           </div>
         `;
-        if (window.renderMathInElement) window.renderMathInElement(document.getElementById("output-pot"));
+        renderCalcMath(document.getElementById("output-pot"));
       } catch (err) {
         document.getElementById("output-pot").innerHTML = `<div class="output-error">${err.message}</div>`;
       }
@@ -494,7 +509,7 @@ export const CALCULATORS = {
             </div>
           </div>
         `;
-        if (window.renderMathInElement) window.renderMathInElement(document.getElementById("output-pe"));
+        renderCalcMath(document.getElementById("output-pe"));
       } catch (err) {
         document.getElementById("output-pe").innerHTML = `<div class="output-error">${err.message}</div>`;
       }
@@ -519,7 +534,7 @@ export const CALCULATORS = {
             <p>Computation: $$${res.computation}$$</p>
           </div>
         `;
-        if (window.renderMathInElement) window.renderMathInElement(document.getElementById("output-wave"));
+        renderCalcMath(document.getElementById("output-wave"));
       } catch (err) {
         document.getElementById("output-wave").innerHTML = `<div class="output-error">${err.message}</div>`;
       }
@@ -536,7 +551,7 @@ export const CALCULATORS = {
             <p>$$${res.steps[0]}$$</p>
           </div>
         `;
-        if (window.renderMathInElement) window.renderMathInElement(document.getElementById("output-soundtemp"));
+        renderCalcMath(document.getElementById("output-soundtemp"));
       } catch (err) {
         document.getElementById("output-soundtemp").innerHTML = `<div class="output-error">${err.message}</div>`;
       }
@@ -555,7 +570,7 @@ export const CALCULATORS = {
             </div>
           </div>
         `;
-        if (window.renderMathInElement) window.renderMathInElement(document.getElementById("output-soundint"));
+        renderCalcMath(document.getElementById("output-soundint"));
       } catch (err) {
         document.getElementById("output-soundint").innerHTML = `<div class="output-error">${err.message}</div>`;
       }
@@ -576,7 +591,7 @@ export const CALCULATORS = {
             </div>
           </div>
         `;
-        if (window.renderMathInElement) window.renderMathInElement(document.getElementById("output-multisource"));
+        renderCalcMath(document.getElementById("output-multisource"));
       } catch (err) {
         document.getElementById("output-multisource").innerHTML = `<div class="output-error">${err.message}</div>`;
       }
@@ -609,7 +624,7 @@ export const CALCULATORS = {
             </div>
           </div>
         `;
-        if (window.renderMathInElement) window.renderMathInElement(document.getElementById("output-dop"));
+        renderCalcMath(document.getElementById("output-dop"));
       } catch (err) {
         document.getElementById("output-dop").innerHTML = `<div class="output-error">${err.message}</div>`;
       }
@@ -653,7 +668,7 @@ export const CALCULATORS = {
             </div>
           </div>
         `;
-        if (window.renderMathInElement) window.renderMathInElement(document.getElementById("output-neut"));
+        renderCalcMath(document.getElementById("output-neut"));
       } catch (err) {
         document.getElementById("output-neut").innerHTML = `<div class="output-error">${err.message}</div>`;
       }
@@ -676,7 +691,7 @@ export const CALCULATORS = {
             </div>
           </div>
         `;
-        if (window.renderMathInElement) window.renderMathInElement(document.getElementById("output-cgs"));
+        renderCalcMath(document.getElementById("output-cgs"));
       } catch (err) {
         document.getElementById("output-cgs").innerHTML = `<div class="output-error">${err.message}</div>`;
       }

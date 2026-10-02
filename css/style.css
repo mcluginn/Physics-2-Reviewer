@@ -324,9 +324,6 @@ a:hover {
 .katex-display {
   margin: 0.5em 0 !important;
 }
-.katex-mathml {
-  display: none !important;
-}
 .katex-error {
   color: inherit !important;
   font-family: inherit !important;
@@ -1195,6 +1192,50 @@ a:hover {
 .sol-step.highlight-answer {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(10, 35, 68, 0.9));
   border: 1px solid rgba(16, 185, 129, 0.45);
+}
+
+.math-display-line {
+  margin: 0.45rem 0;
+  overflow-x: auto;
+  text-align: left;
+}
+
+.step-math-content {
+  margin-top: 0.35rem;
+}
+
+.step-math-content .katex-display {
+  margin: 0.35em 0 !important;
+}
+
+.answer-math {
+  font-size: 1.25rem;
+  color: #6ee7b7;
+}
+
+.sol-heading {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--brass-400);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.85rem;
+  margin-bottom: 0.35rem;
+}
+
+.sol-math-block {
+  margin: 0.4rem 0;
+  overflow-x: auto;
+}
+
+.sol-bullet-list {
+  padding-left: 1.25rem;
+  margin: 0.4rem 0;
+}
+
+.sol-bullet-list li {
+  margin-bottom: 0.3rem;
 }
 
 /* Common Mistakes */
