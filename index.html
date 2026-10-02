@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physics 2 for Engineers | Midterm Review Platform</title>
+  <meta name="description" content="GEN 0110 / 0110L Physics 2 for Engineers interactive midterm review and tutoring system. Comprehensive reviewer, worked examples, practice generator, and interactive calculators.">
+  
+  <!-- Modern Fonts from Problem Set -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- KaTeX CSS & JS for Mathematical Typesetting -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Problem Set UI/UX Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <a href="#home" class="brand-link nav-link" data-tab="home">
+          <div class="brand-logo-disc">
+            <img src="assets/mechanical-engineering-society.png" alt="Mechanical Engineering Society Emblem">
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">
+              PHYSICS 2 FOR <span class="brand-engine-highlight">ENGINEERS</span>
+            </span>
+            <span class="brand-subtitle">GEN 0110 / 0110L · MECHANICAL ENGINEERING SOCIETY</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Global Search Input -->
+      <div class="search-wrapper">
+        <div class="search-input-container">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="global-search-input" placeholder="Search concepts, formulas, exam problems..." autocomplete="off">
+        </div>
+        <div id="search-results-overlay" class="search-dropdown" style="display:none;"></div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="main-nav" id="main-nav-menu">
+        <a href="#home" class="nav-link active" data-tab="home">Dashboard</a>
+        <a href="#practice" class="nav-link" data-tab="practice">Practice Me</a>
+        <a href="#quiz" class="nav-link" data-tab="quiz">Quiz Mode</a>
+        <a href="#calculators" class="nav-link" data-tab="calculators">Calculators</a>
+        <a href="#formulas" class="nav-link" data-tab="formulas">Formulas</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="header-actions">
+        <button id="btn-theme-toggle" class="btn btn-sm btn-outline">☀️ Light</button>
+        <button id="mobile-menu-toggle" class="btn btn-sm btn-ghost mobile-only" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Body Container -->
+  <main class="app-main">
+
+    <!-- 1. HOME / DASHBOARD VIEW -->
+    <section id="view-home" class="view-section">
+      <!-- CourseHeader Banner -->
+      <div class="hero-section">
+        <div class="hero-course-banner">
+          <div class="hero-course-info">
+            <div class="hero-course-tag">
+              <span>🎓</span> ADAPTIVE ENGINEERING PRACTICE · MIDTERM EXAMINATION
+            </div>
+            <h1 class="hero-title">Physics 2 for Engineers</h1>
+            <div class="hero-course-meta">
+              <span class="hero-course-code">GEN 0110 / 0110L</span>
+              <span class="hero-course-bullet">•</span>
+              <span>Midterm Examination Set A Reviewer</span>
+              <span class="hero-course-bullet">•</span>
+              <span>College of Engineering</span>
+            </div>
+            <p class="mt-4 text-sm text-muted">
+              Master point-charge electrostatics, electric fields, scalar potential, wave propagation, acoustic decibels, Doppler kinematics, closed-pipe resonance, and static equilibrium.
+            </p>
+            <div class="hero-cta-strip">
+              <button class="btn btn-primary hero-btn" data-tab="topics">🚀 Review 15 Topics</button>
+              <button class="btn btn-accent hero-btn" data-tab="practice">⚡ Fresh Problem Generator</button>
+              <button class="btn btn-outline hero-btn" data-tab="quiz">📝 Take Practice Quiz</button>
+              <button class="btn btn-outline hero-btn" data-tab="formulas">📐 Formula Sheet</button>
+              <button class="btn btn-outline hero-btn" data-tab="calculators">🧮 12 Calculators</button>
+            </div>
+          </div>
+
+          <!-- Animated Mechanical Gear Mechanism -->
+          <div class="hero-mechanism-wrapper">
+            <div class="gear-assembly gear-assembly--large hidden sm:block" id="home-gear-assembly">
+              <div class="gear-assembly-plane">
+                <svg class="gear-construction" viewBox="0 0 195 155" focusable="false">
+                  <path d="M 5 66 H 190 M 65 6 V 125 M 145 18 V 151" fill="none" stroke="currentColor" stroke-width=".5" stroke-dasharray="2 5"></path>
+                  <circle cx="65" cy="66" r="57" fill="none" stroke="currentColor" stroke-width=".5"></circle>
+                </svg>
+                <!-- Gear 1: 24 Teeth (CW) -->
+                <div class="gear-position" style="left: 15px; top: 16px; width: 100px; height: 100px;">
+                  <div class="gear-spin-cw">
+                    <svg width="100" height="100" viewBox="0 0 100 100" class="mechanical-gear">
+                      <circle cx="50" cy="50" r="46" fill="#244365" stroke="#8ea8c0" stroke-width="1.2" stroke-dasharray="6.5 5.5"></circle>
+                      <circle cx="50" cy="50" r="32" fill="#061b3a" stroke="#8ea8c0" stroke-width="1"></circle>
+                      <line x1="50" y1="18" x2="50" y2="82" stroke="#8ea8c0" stroke-width="2" opacity="0.6"></line>
+                      <line x1="18" y1="50" x2="82" y2="50" stroke="#8ea8c0" stroke-width="2" opacity="0.6"></line>
+                      <circle cx="50" cy="50" r="14" fill="#244365" stroke="#8ea8c0" stroke-width="1"></circle>
+                      <circle cx="50" cy="50" r="6" fill="#06162f" stroke="#8ea8c0" stroke-width="1"></circle>
+                    </svg>
+                  </div>
+                </div>
+                <!-- Gear 2: 16 Teeth Brass (CCW) -->
+                <div class="gear-position" style="left: 111px; top: 32px; width: 68px; height: 68px;">
+                  <div class="gear-spin-ccw">
+                    <svg width="68" height="68" viewBox="0 0 68 68" class="mechanical-gear mechanical-gear--brass">
+                      <circle cx="34" cy="34" r="31" fill="#845b15" stroke="#ffd477" stroke-width="1.2" stroke-dasharray="5.5 4.5"></circle>
+                      <circle cx="34" cy="34" r="22" fill="#061b3a" stroke="#ffd477" stroke-width="1"></circle>
+                      <circle cx="34" cy="34" r="10" fill="#845b15" stroke="#ffd477" stroke-width="1"></circle>
+                      <circle cx="34" cy="34" r="4" fill="#06162f" stroke="#ffd477" stroke-width="1"></circle>
+                    </svg>
+                  </div>
+                </div>
+                <!-- Gear 3: 12 Teeth (CW Fast) -->
+                <div class="gear-position" style="left: 119px; top: 96px; width: 52px; height: 52px;">
+                  <div class="gear-spin-cw-fast">
+                    <svg width="52" height="52" viewBox="0 0 52 52" class="mechanical-gear">
+                      <circle cx="26" cy="26" r="23" fill="#244365" stroke="#8ea8c0" stroke-width="1.2" stroke-dasharray="5 4"></circle>
+                      <circle cx="26" cy="26" r="16" fill="#061b3a" stroke="#8ea8c0" stroke-width="1"></circle>
+                      <circle cx="26" cy="26" r="7" fill="#244365" stroke="#8ea8c0" stroke-width="1"></circle>
+                      <circle cx="26" cy="26" r="3" fill="#06162f" stroke="#8ea8c0" stroke-width="1"></circle>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CourseMetrics 4-Card Status Strip -->
+      <div class="container mt-4">
+        <div class="course-metrics-grid" id="home-course-metrics">
+          <!-- Card 1: Streak -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span>Current Streak</span>
+              <span class="icon text-amber">🔥</span>
+            </div>
+            <div class="metric-body">
+              <div class="metric-value-row">
+                <span class="metric-number" id="metric-streak-val">3</span>
+                <span class="metric-unit">days</span>
+              </div>
+              <div class="metric-subtitle">Active daily review</div>
+            </div>
+          </div>
+
+          <!-- Card 2: Overall Mastery -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span>Overall Mastery</span>
+              <span class="icon text-success">✓</span>
+            </div>
+            <div class="metric-body">
+              <div class="metric-value-row">
+                <span class="metric-number" id="metric-mastery-val">0%</span>
+                <span class="badge eng-badge-amber" id="metric-mastery-badge">Novice</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="metric-mastery-bar" style="width: 0%"></div>
+              </div>
+              <div class="metric-subtitle" id="metric-mastery-sub">0 of 31 reviewer questions mastered</div>
+            </div>
+          </div>
+
+          <!-- Card 3: Topics Mastered -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span>Topics Mastered</span>
+              <span class="icon text-brass">📈</span>
+            </div>
+            <div class="metric-body">
+              <div class="metric-value-row">
+                <span class="metric-number" id="metric-topics-val">0</span>
+                <span class="metric-unit">/ 15</span>
+              </div>
+              <div class="metric-subtitle">Syllabus topics verified</div>
+            </div>
+          </div>
+
+          <!-- Card 4: Practice Problems Solved -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span>Questions Attempted</span>
+              <span class="icon text-brass">⏱️</span>
+            </div>
+            <div class="metric-body">
+              <div class="metric-value-row">
+                <span class="metric-number" id="metric-attempts-val">0</span>
+                <span class="metric-unit">problems</span>
+              </div>
+              <div class="metric-subtitle">Tracked in practice history</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Topics Grid -->
+        <div class="section-heading mt-6">
+          <h2>Midterm Examination Core Competencies</h2>
+          <p class="text-muted">Directly mapped to the authorized GEN 0110 examination syllabus.</p>
+        </div>
+
+        <div class="topic-cards-grid">
+          <!-- Topic 1 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='coulomb-law'; window.app.switchTab('topics');">
+            <span class="topic-tag">01 · Electrostatics</span>
+            <h3>Electric Charge & Coulomb's Law</h3>
+            <p>Fundamental charge $e$, inverse-square force $F = k|q_1 q_2|/r^2$, and attraction vs repulsion.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 2 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='electric-field'; window.app.switchTab('topics');">
+            <span class="topic-tag">02 · Electrostatics</span>
+            <h3>Electric Field & Superposition</h3>
+            <p>Field intensity $E = k|Q|/r^2$, radial directions (outward/inward), and vector superposition.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 3 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='force-and-acceleration'; window.app.switchTab('topics');">
+            <span class="topic-tag">03 · Motion in Fields</span>
+            <h3>Force & Acceleration in Fields</h3>
+            <p>Particle dynamics $F = qE$, Newton's second law $a = qE/m$, and electron vs proton motion.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 4 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='electric-potential'; window.app.switchTab('topics');">
+            <span class="topic-tag">04 · Potential</span>
+            <h3>Electric Potential (Scalar Voltage)</h3>
+            <p>Scalar nature of voltage $V = kQ/r$ in Volts (J/C) and algebraic superposition.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 5 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='work-and-potential-energy'; window.app.switchTab('topics');">
+            <span class="topic-tag">05 · Energy</span>
+            <h3>Work & Multi-Charge Potential Energy</h3>
+            <p>Field work $W = q(V_a - V_b)$, pair energy $U = kq_1q_2/r$, and pairwise summation.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 6 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='wave-basics'; window.app.switchTab('topics');">
+            <span class="topic-tag">06 · Waves</span>
+            <h3>Wave Fundamentals & Sound</h3>
+            <p>Universal wave relation $v = f\lambda$, transverse vs longitudinal, and pressure propagation.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 7 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='speed-of-sound-temp'; window.app.switchTab('topics');">
+            <span class="topic-tag">07 · Acoustics</span>
+            <h3>Speed of Sound vs. Temperature</h3>
+            <p>Authoritative examination approximation $v \approx 331 + 0.6T$ with $T$ in °C.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 8 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='sound-intensity-decibels'; window.app.switchTab('topics');">
+            <span class="topic-tag">08 · Acoustics</span>
+            <h3>Sound Intensity & Decibels</h3>
+            <p>Inverse-square acoustic law $I = P/(4\pi r^2)$ and logarithmic decibel level $\beta = 10\log_{10}(I/I_0)$.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 9 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='multiple-sound-sources'; window.app.switchTab('topics');">
+            <span class="topic-tag">09 · Acoustics</span>
+            <h3>Multiple Identical Sound Sources</h3>
+            <p>Non-linear decibel addition, intensity multiplication $I_{\text{total}} = NI$, and $\Delta\beta = 10\log_{10}N$.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 10 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='doppler-effect'; window.app.switchTab('topics');">
+            <span class="topic-tag">10 · Acoustics</span>
+            <h3>The Doppler Effect</h3>
+            <p>Moving sources and observers $f' = f(v \pm v_o)/(v \mp v_s)$ with physical sign rules.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 11 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='closed-pipe-resonance'; window.app.switchTab('topics');">
+            <span class="topic-tag">11 · Resonance</span>
+            <h3>Closed Air Column Resonance</h3>
+            <p>Quarter-wavelength standing waves $f_1 = v/(4L)$ and odd harmonic spectrum ($1, 3, 5...$).</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 12 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='neutral-point'; window.app.switchTab('topics');">
+            <span class="topic-tag">12 · Equilibrium</span>
+            <h3>Electrostatic Neutral Point</h3>
+            <p>Electric field null location between like charges, proportional to charge square roots.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 13 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='charged-spheres-equilibrium'; window.app.switchTab('topics');">
+            <span class="topic-tag">13 · Equilibrium</span>
+            <h3>Charged Spheres Equilibrium</h3>
+            <p>Suspended sphere static equilibrium FBD, resolving string tension, weight, and repulsion.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 14 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='cgs-electrostatics'; window.app.switchTab('topics');">
+            <span class="topic-tag">14 · Units</span>
+            <h3>CGS Electrostatic System</h3>
+            <p>statCoulombs, dynes, cm, and Coulomb's law with $k = 1$ in Gaussian-esu.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+
+          <!-- Topic 15 -->
+          <div class="topic-overview-card" onclick="window.app.activeTopicId='vector-components-efield'; window.app.switchTab('topics');">
+            <span class="topic-tag">15 · Vector Resolution</span>
+            <h3>Vector Components of Field</h3>
+            <p>Resolving $E_x = E\cos\theta$ and $E_y = E\sin\theta$ for 2D charge geometry.</p>
+            <span class="card-action">Review Topic →</span>
+          </div>
+        </div>
+
+        <!-- Embedded Engineering Unit Converter -->
+        <div class="mt-6" id="unit-converter-mount"></div>
+      </div>
+    </section>
+
+    <!-- 2. TOPICS REVIEW VIEW -->
+    <section id="view-topics" class="view-section" style="display:none;">
+      <div class="topics-layout">
+        <aside class="topics-sidebar-container" id="topics-sidebar"></aside>
+        <div class="topics-content-container" id="topics-content"></div>
+      </div>
+    </section>
+
+    <!-- 3. PRACTICE ME VIEW -->
+    <section id="view-practice" class="view-section" style="display:none;">
+      <div class="container" id="practice-mount"></div>
+    </section>
+
+    <!-- 4. QUIZ MODE VIEW -->
+    <section id="view-quiz" class="view-section" style="display:none;">
+      <div class="container" id="quiz-mount"></div>
+    </section>
+
+    <!-- 5. CALCULATORS VIEW -->
+    <section id="view-calculators" class="view-section" style="display:none;">
+      <div class="container">
+        <div class="section-heading text-center">
+          <h2>🧮 Interactive Physics Calculators</h2>
+          <p class="text-muted">Explore parameter sensitivity with automatic unit handling and step-by-step substitution.</p>
+        </div>
+        <div id="calculators-mount"></div>
+      </div>
+    </section>
+
+    <!-- 6. FORMULA SHEET VIEW -->
+    <section id="view-formulas" class="view-section" style="display:none;">
+      <div class="container" id="formulas-mount"></div>
+    </section>
+
+    <!-- 7. PROGRESS DASHBOARD VIEW -->
+    <section id="view-progress" class="view-section" style="display:none;">
+      <div class="container" id="progress-mount"></div>
+    </section>
+
+
+  </main>
+
+  <!-- Application Footer -->
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <strong>GEN 0110 / 0110L Physics 2 for Engineers</strong>
+        <p class="text-sm text-muted">Mechanical Engineering Society Tutoring Reviewer & Midterm Preparation System</p>
+      </div>
+      <div class="footer-right">
+        <span class="badge eng-badge-amber">Authoritative Scope: Midterm Set A Only</span>
+        <span class="text-sm text-muted font-mono">College of Engineering</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main Application Script -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
