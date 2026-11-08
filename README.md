@@ -1,73 +1,71 @@
-# GEN 0110 / 0110L Physics 2 for Engineers — Midterm Review Platform
+# GEN 0110 / 0110L Physics 2 for Engineers — MEODL Quiz Bee Edition
 
-[![Mechanical Engineering Society](https://img.shields.io/badge/Mechanical_Engineering_Society-GEN_0110-f7b943.svg)](https://github.com/mcluginn)
-[![Authoritative Scope](https://img.shields.io/badge/Syllabus-Midterm_Set_A-0a2344.svg)](index.html)
+[![MEODL Quiz Bee 2026](https://img.shields.io/badge/MEODL_Quiz_Bee-2026_Edition-f7b943.svg)](https://mcluginn.github.io/Physics-2-Reviewer/)
+[![Syllabus Final Set A](https://img.shields.io/badge/Syllabus-Final_Exam_Set_A-0a2344.svg)](index.html)
+[![GitHub Pages](https://img.shields.io/badge/Deployment-GitHub_Pages-10b981.svg)](https://mcluginn.github.io/Physics-2-Reviewer/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-An educational review, practice, and tutoring web application tailored for **GEN 0110 / 0110L Physics 2 for Engineers** preparing for the **Midterm Examination Set A**.
+An interactive, high-yield concept review and practice platform tailored for **GEN 0110 / 0110L Physics 2 for Engineers** preparing for the **Final Examination (Set A)**.
 
-Designed using the **Mechanical Engineering Society** design system (Deep Navy, Steel Blue, and Brass Gold palette with mechanical gear kinematics).
+Styled with the official **MEODL Quiz Bee 2026** Engineering Design System (`#06162f` deep midnight navy, radial glow illumination, `.eng-panel`, `.eng-card`, high-visibility brass/gold accents, and digital projector timer HUD).
 
 ---
 
 ## 🚀 Live Demo & Deployment
-
-This application is built as a zero-dependency static web application, perfectly suited for deployment on **GitHub Pages**:
-
-* **Repository**: Deploy directly to GitHub Pages by enabling Pages from **Settings > Pages > Branch: `main` / `root`**.
-* **Live Web App**: Loads completely in modern web browsers with full client-side KaTeX typesetting, interactive HTML5 Canvas/SVG simulations, and procedural practice generators.
+* **Live GitHub Pages URL**: **[https://mcluginn.github.io/Physics-2-Reviewer/](https://mcluginn.github.io/Physics-2-Reviewer/)**
+* **Standalone Architecture**: Zero runtime dependencies. Loads instantly on all modern browsers with strict client-side MathJax 3 + native MathML typesetting and interactive SVG/Canvas simulators.
 
 ---
 
-## 📚 Examination Scope (15 Core Topics)
+## 📚 Curriculum Scope (4 Core Units & 16 Modules)
 
-Covering exclusively the authorized Midterm Examination syllabus:
+### Unit 1: Hydropower Machinery
+1. **Plant Layout & Energy Transformation Cascade**: Elevation head, penstock kinetic energy, runner mechanical work, generator electric output.
+2. **Gross vs. Net Head & Penstock Efficiency**: $h_g = \text{HWE} - \text{TWE}$, $h = h_g - h_f$, $\eta_p = h / h_g$.
+3. **Theoretical Water Power & Net Electrical Power**: $P_w = \gamma Q h = 9.81 Q h\text{ [kW]}$, $P_e = \eta_t \eta_g P_w$.
+4. **Hydraulic Turbines & Synchronous Speed**: Impulse (Pelton) vs. Reaction (Francis/Kaplan), synchronous grid speed $N = \frac{120 f}{P}$.
 
-1. **Electric Charge & Coulomb's Law** — Elementary charge $e$, $F = \frac{k|q_1 q_2|}{r^2}$, attraction vs. repulsion.
-2. **Electric Field & Superposition** — Point charge field $E = \frac{k|Q|}{r^2}$, field vectors, superposition.
-3. **Force & Acceleration in Fields** — Dynamic motion $F = qE$, $a = \frac{qE}{m}$ for electrons and protons.
-4. **Electric Potential (Scalar Voltage)** — Scalar nature $V = \frac{kQ}{r}$ in Volts (J/C), algebraic sum.
-5. **Work & Multi-Charge Potential Energy** — Field work $W = q(V_a - V_b)$, pairwise summation $U = \sum \frac{kq_i q_j}{r_{ij}}$.
-6. **Wave Fundamentals & Sound** — Universal relation $v = f\lambda$, longitudinal pressure propagation.
-7. **Speed of Sound vs. Temperature** — Examination standard $v \approx 331 + 0.6T$ with $T$ in °C.
-8. **Sound Intensity & Decibels** — Inverse-square $I = \frac{P}{4\pi r^2}$ and logarithmic decibel level $\beta = 10\log_{10}(I/I_0)$.
-9. **Multiple Identical Sound Sources** — Multi-engine acoustic addition $I_{\text{tot}} = NI$, $\Delta\beta = 10\log_{10}N$.
-10. **The Doppler Effect** — Moving sources and observers $f' = f\left(\frac{v \pm v_o}{v \mp v_s}\right)$ with physical sign rules.
-11. **Resonance in Closed Air Columns** — Quarter-wavelength harmonics $f_1 = \frac{v}{4L}$, $f_n = n f_1$ ($n=1,3,5\dots$).
-12. **Electrostatic Neutral Point** — Electric field cancellation between like charges $\frac{x}{d-x} = \sqrt{\frac{q_1}{q_2}}$.
-13. **Charged Spheres Equilibrium** — Static equilibrium free-body diagram resolving string tension, weight, and repulsion.
-14. **CGS Electrostatic System** — statCoulombs, dynes, cm, and Gaussian-esu Coulomb's law with $k = 1$.
-15. **Vector Components of Electric Field** — Resolving $E_x = E\cos\theta$ and $E_y = E\sin\theta$ for 2D geometries.
+### Unit 2: Geometric & Physical Optics
+5. **Speed of Light & Refractive Index**: $v = c / n$, optical density across vacuum, air, water, glass, and diamond.
+6. **Snell's Law & Apparent Depth**: $n_1 \sin\theta_1 = n_2 \sin\theta_2$, apparent depth for vertical viewing $d' = d / n$.
+7. **Total Internal Reflection & Critical Angle**: $\sin\theta_c = n_2 / n_1$, 100% loss-free fiber-optic waveguiding.
+8. **Thin Lenses & Vision Correction (Myopia)**: Lens equation $\frac{1}{f} = \frac{1}{d_o} + \frac{1}{d_i}$, magnification $m = -d_i / d_o$, corrective diverging power $P = 1/f\text{ [Diopters]}$.
 
----
+### Unit 3: Direct Current (DC) Electricity & Circuits
+9. **Ohm's Law & Electrical Power**: $V = IR$, $P = VI = I^2 R = V^2 / R$.
+10. **Resistors in Series & Voltage Divider Rule**: $R_{\text{eq}} = \sum R_k$, constant current $I_s = V_s / R_{\text{eq}}$, individual drops $V_k = I_s R_k$.
+11. **Resistors in Parallel & Current Divider Rule**: $1/R_{\text{eq}} = \sum 1/R_k$, constant voltage $V_s$, branch currents $I_k = V_s / R_k$.
+12. **Series-Parallel Combination Networks**: Circuit reduction, node voltages, branch currents, and individual resistor power dissipations.
 
-## 🛠️ Features
-
-* **Algorithmic Practice Generator**: Synthesizes fresh problem variations with realistic parameters and 4-step progressive reveals (Hint $\to$ First Step $\to$ Full Solution $\to$ Final Answer).
-* **31-Question Practice Quiz**: Full question bank with instant explanations and score tracking.
-* **12 Physics Calculators**: Interactive solvers with step-by-step formula substitutions and unit conversions.
-* **6 Visual Physics Simulations**:
-  - Coulomb Field & Neutral Point Null Search
-  - 2D Electric Field Vector Components
-  - Longitudinal Acoustic Wave Particle Motion
-  - Doppler Wavefront Compression
-  - Closed-Pipe Standing Wave Harmonics
-  - Suspended Spheres Free-Body Diagram
-* **Integrated Engineering Unit Converter**: Instant conversions between C, $\mu$C, nC, statC, dynes, N, cm, m, dB, and $\text{W/m}^2$.
-* **Formulas & Constants Quick Reference**: Complete table of formulas, variables, and physical constants.
+### Unit 4: Modern Physics & Special Relativity
+13. **Inertial Reference Frames & Speed of Light Postulate**: Invariance of $c = 3.00 \times 10^8\text{ m/s}$ in all inertial frames.
+14. **Time Dilation & Proper Time**: $\Delta t = \gamma \Delta t_0$, Lorentz factor $\gamma = \frac{1}{\sqrt{1 - (v/c)^2}}$.
+15. **Length Contraction & Relativistic Momentum**: $L = L_0 / \gamma$ strictly along the motion axis; $p = \gamma m v$.
+16. **Mass-Energy Equivalence & Velocity Addition**: $E = mc^2 = \gamma m_0 c^2$, nuclear mass defect $\Delta m = \Delta E_0 / c^2$, Einstein velocity addition $u = \frac{u' + v}{1 + \frac{u' v}{c^2}}$.
 
 ---
 
-## 💻 Local Development
+## 🛠️ Key Platform Features
 
-Run locally with any static HTTP server or Node.js:
+* **MEODL Quiz Bee Engineering Theme**: Deep navy background with radial lighting, brass accents, monospace tabular numerals, and option cards.
+* **Dynamic Interactive Visualizers**:
+  - DC Circuit Live Simulator (Series, Parallel, Combo network reduction with real-time sliders and calculations).
+  - Hydropower Head & Transmission Efficiency Calculator.
+  - Generator Synchronous Speed Solver ($N = 120f/P$).
+  - Snell's Law & Apparent Depth Virtual Image Visualizer.
+  - Critical Angle & 100% Total Internal Reflection Visualizer.
+  - Thin-Lens Optical Ray Tracer with Diopter calculator.
+  - Special Relativity Lorentz Transformation, Dilation & Contraction Simulator.
+* **2-Hour High-Yield Express Review Track**: 120-minute digital projector countdown timer structured into four 30-minute high-yield phases.
+* **Side-by-Side Comparative Matrices**: 8 deep-dive comparisons (Pelton vs Francis, Gross vs Net Head, Converging vs Diverging Lenses, Real vs Virtual Images, Series vs Parallel Circuits, Ohm's Law vs Electric Power, Proper vs Dilated Time, Rest vs Contracted Length).
+* **28 Interactive Conceptual Drills**: 12 Rapid Rule Verification Drills, 8 Spot-the-Mistake Diagnostics, and 8 Real-World Engineering Scenarios.
+* **24 3D Flip Flashcards**: Interactive Leitner spaced repetition review.
+* **Master Formulas & Units Cheat Sheet**: Quick reference guide with printable CSS.
+* **30-Question Timed Mock Examination**: Mapped 1:1 with official Final Exam rubric and Table of Specifications, featuring instant Quiz Bee **Answer Reveal Banners** and step-by-step derivations.
 
-```bash
-# Using Node.js built-in zero-dependency server:
-node server.js
+---
 
-# Or using Python:
-python -m http.server 3000
-```
-
-Then navigate to `http://localhost:3000`.
+## 👥 Authorship & Credits
+* **Course**: GEN 0110 / 0110L Physics 2 for Engineers
+* **Syllabus & TOS**: Engr. Mc. Luginn Seña
+* **Visual Theme**: MEODL Quiz Bee 2026 Engineering Design System
